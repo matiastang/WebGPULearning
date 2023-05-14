@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-15 15:54:50
- * @LastEditTime: 2022-04-01 15:05:24
- * @LastEditors: matiastang
+ * @LastEditTime: 2023-05-14 17:11:00
+ * @LastEditors: tangdaoyong
  * @Description: In User Settings Edit
  * @FilePath: /datumwealth-front-scaffold/src/App.vue
 -->
 <template>
-    <div class="title-test">样式测试</div>
-    <div id="title-red">样式测试</div>
+    <!-- <div class="title-test">样式测试</div>
+    <div id="title-red">样式测试</div> -->
     <!-- 路由出口 -->
     <router-view></router-view>
 </template>

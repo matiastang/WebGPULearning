@@ -3,6 +3,7 @@ build
 dist
 .pnpm-debug
 .DS_Store
+.history
 
 npm-debug.log*
 yarn-debug.log*

@@ -15,7 +15,7 @@
         "resolveJsonModule": true,
         "sourceMap": true,
         "baseUrl": ".",
-        "types": ["element-plus/global"],
+        "types": ["element-plus/global", "vite/client", "@webgpu/types", "@types/dom-webcodecs"],
         "paths": {
             "utils/*": ["src/common/utils/*"],
             "store/*": ["src/store/*"],

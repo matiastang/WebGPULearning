@@ -1,8 +1,8 @@
 /*
  * @Author: matiastang
  * @Date: 2021-12-28 19:31:46
- * @LastEditors: matiastang
- * @LastEditTime: 2022-05-10 19:35:58
+ * @LastEditors: tangdaoyong
+ * @LastEditTime: 2023-05-14 18:11:05
  * @FilePath: /datumwealth-front-scaffold/src/router/index.ts
  * @Description: 路由
  */
@@ -11,6 +11,8 @@ import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } 
 import Layout from '@/components/layout/Layout.vue'
 // web
 import Home from '@/views/home/Home.vue'
+import HelloWebGPU from '@/views/WebGPU/WebGPU.vue'
+import TriangleWebGPU from '@/views/WebGPU/Triangle.vue'
 // NotFound
 import NotFound from '@/views/NotFound.vue'
 
@@ -30,6 +32,16 @@ const routes: Array<RouteRecordRaw> = [
             console.log(`web路由卫士：即将从${from.path}跳转到${to.path}`)
             return true
         },
+    },
+    {
+        path: '/helloWebGPU',
+        name: 'helloWebGPU',
+        component: HelloWebGPU,
+    },
+    {
+        path: '/triangleWebGPU',
+        name: 'triangleWebGPU',
+        component: TriangleWebGPU,
     },
     {
         path: '/:pathMatch(.*)*', // 将匹配所有内容并将其放在 `$route.params.pathMatch` 下
