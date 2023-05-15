@@ -2,7 +2,7 @@
  * @Author: tangdaoyong
  * @Date: 2023-05-14 17:38:18
  * @LastEditors: tangdaoyong
- * @LastEditTime: 2023-05-14 18:17:13
+ * @LastEditTime: 2023-05-15 22:41:51
  * @Description: 2. 三角形
 -->
 <template>
@@ -16,16 +16,11 @@ import triangleFrag from './shaders/triangle/triangle.frag.wgsl?raw'
 const initCanvas = () => {
     const canvas = document.getElementById('canvas') as HTMLCanvasElement | null
     if (!canvas) throw new Error('No Canvas')
-    console.log(canvas)
     const context = canvas.getContext('webgpu')
     if (!context) {
         throw new Error('No webgpu')
     }
-    const devicePixelRatio = window.devicePixelRatio || 1
-    canvas.width = canvas.clientWidth * devicePixelRatio
-    canvas.height = canvas.clientHeight * devicePixelRatio
-    const canvasSize = { width: canvas.width, height: canvas.height }
-    return { canvas, context, canvasSize }
+    return { canvas, context }
 }
 
 const initWebGPU = async () => {
@@ -98,7 +93,11 @@ const draw = (device: GPUDevice, context: GPUCanvasContext, pipeline: GPURenderP
 }
 
 const init = async () => {
-    const { canvas, context, canvasSize } = initCanvas()
+    const { canvas, context } = initCanvas()
+    const devicePixelRatio = window.devicePixelRatio || 1
+    canvas.width = canvas.clientWidth * devicePixelRatio
+    canvas.height = canvas.clientHeight * devicePixelRatio
+    const canvasSize = { width: canvas.width, height: canvas.height }
     const { device, format } = await initWebGPU()
     context.configure({
         // json specific format when key and value are the same
@@ -111,7 +110,6 @@ const init = async () => {
     // start draw
     draw(device, context, pipeline)
 
-    const devicePixelRatio = window.devicePixelRatio || 1
     window.addEventListener('resize', () => {
         canvas.width = canvas.clientWidth * devicePixelRatio
         canvas.height = canvas.clientHeight * devicePixelRatio
