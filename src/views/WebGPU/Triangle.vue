@@ -2,7 +2,7 @@
  * @Author: tangdaoyong
  * @Date: 2023-05-14 17:38:18
  * @LastEditors: tangdaoyong
- * @LastEditTime: 2023-05-15 22:41:51
+ * @LastEditTime: 2023-05-22 21:24:53
  * @Description: 2. 三角形
 -->
 <template>
@@ -14,7 +14,8 @@ import triangleVert from './shaders/triangle/triangle.vert.wgsl?raw'
 import triangleFrag from './shaders/triangle/triangle.frag.wgsl?raw'
 
 const initCanvas = () => {
-    const canvas = document.getElementById('canvas') as HTMLCanvasElement | null
+    const canvas = document.querySelector('canvas')
+    // const canvas = document.getElementById('canvas') as HTMLCanvasElement | null
     if (!canvas) throw new Error('No Canvas')
     const context = canvas.getContext('webgpu')
     if (!context) {

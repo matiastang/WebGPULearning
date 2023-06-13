@@ -2,7 +2,7 @@
  * @Author: tangdaoyong
  * @Date: 2023-05-15 22:53:20
  * @LastEditors: tangdaoyong
- * @LastEditTime: 2023-05-15 23:29:50
+ * @LastEditTime: 2023-05-22 22:03:12
  * @Description: 3. 颜色三角形
 -->
 <template>
@@ -18,6 +18,7 @@
 import { onMounted, ref } from 'vue'
 import triangleVert from './shaders/colorTriangle/triangle.vert.wgsl?raw'
 import triangleFrag from './shaders/colorTriangle/triangle.frag.wgsl?raw'
+// import { GPURenderPipelineDescriptor } from '@webgpu/types'
 
 const colorValue = ref('#FF0000')
 const positionValue = ref(0)
@@ -25,9 +26,14 @@ const positionValue = ref(0)
 const vertex = new Float32Array([0.0, 0.5, 0.0, -0.5, -0.5, 0.0, 0.5, -0.5, 0.0])
 const vertexCount = 3
 
+/**
+ * 获取canvas
+ */
 const initCanvas = () => {
-    const canvas = document.getElementById('canvas') as HTMLCanvasElement | null
+    // 获取canvas元素
+    const canvas = document.querySelector('canvas')
     if (!canvas) throw new Error('No Canvas')
+    // 获取webgpu上下文
     const context = canvas.getContext('webgpu')
     if (!context) {
         throw new Error('No webgpu')
@@ -35,16 +41,23 @@ const initCanvas = () => {
     return { canvas, context }
 }
 
+/**
+ * 初始化WebGPU
+ */
 const initWebGPU = async () => {
+    // 获取gpu
     const gpu = navigator.gpu
     if (!gpu) {
         throw new Error('Not support WebGPU')
     }
+    // 请求Adapter
     const adapter = await gpu.requestAdapter()
     if (!adapter) {
         throw new Error('No adapter found')
     }
+    // 获取Device
     const device = await adapter.requestDevice()
+    // 获取默认的的数据格式
     const format = gpu.getPreferredCanvasFormat()
     return { device, format }
 }
@@ -167,6 +180,7 @@ const init = async () => {
     canvas.height = canvas.clientHeight * devicePixelRatio
     const canvasSize = { width: canvas.width, height: canvas.height }
     const { device, format } = await initWebGPU()
+    // 配置context
     context.configure({
         // json specific format when key and value are the same
         device,
